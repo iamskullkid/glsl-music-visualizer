@@ -1,0 +1,688 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Visualizer settings and configuration for GLSL Music Visualizer",
+    "location": "assets/presets/visualizers/settings.json",
+    "author": "Advanced Graphics Team",
+    "lastModified": "2025-01-27",
+    "compatibility": {
+      "minVersion": "1.0.0",
+      "maxVersion": "2.0.0",
+      "requiredSystems": ["BlobVisualizer", "BaseVisualizer", "RenderEngine", "AudioEngine"]
+    },
+    "dependencies": [
+      "src/visualizers/blob/BlobVisualizer.js",
+      "src/visualizers/base/BaseVisualizer.js",
+      "src/core/RenderEngine.js",
+      "src/core/AudioEngine.js"
+    ]
+  },
+
+  "defaultVisualizer": "blob",
+  "enableHotReload": true,
+  "enablePerformanceMonitoring": true,
+  "enableAdaptiveQuality": true,
+  "targetFPS": 60,
+
+  "visualizers": {
+    "blob": {
+      "id": "blob",
+      "name": "Physically-Accurate Blob",
+      "type": "blob",
+      "version": "1.0.0",
+      "description": "Advanced amorphous blob with realistic physics and material simulation",
+      "category": "primary",
+      "enabled": true,
+      "priority": 100,
+      "preview": "assets/previews/blob.jpg",
+      "supportedFeatures": [
+        "physics",
+        "materials",
+        "metaballs",
+        "fluid_simulation",
+        "particle_effects",
+        "volumetrics",
+        "caustics",
+        "subsurface_scattering",
+        "audio_reactivity",
+        "real_time_deformation"
+      ],
+
+      "core": {
+        "enabled": true,
+        "enableDepthTest": true,
+        "enableBlending": true,
+        "blendMode": "alpha",
+        "primitive": "triangles",
+        "renderOrder": 0
+      },
+
+      "geometry": {
+        "meshResolution": 64,
+        "meshSubdivisions": 2,
+        "enableAdaptiveMesh": true,
+        "enableLOD": true,
+        "lodLevels": [16, 32, 64, 128],
+        "maxVertices": 65536,
+        "enableMeshOptimization": true,
+        "enableNormalSmoothing": true,
+        "smoothingIterations": 2
+      },
+
+      "physics": {
+        "enablePhysics": true,
+        "enableMetaballs": true,
+        "enableFluidSimulation": true,
+        "enableParticleEffects": true,
+        "enableMaterialPhysics": true,
+        
+        "metaballs": {
+          "count": 8,
+          "radius": 1.5,
+          "charge": 1.0,
+          "maxMetaballs": 32,
+          "enableCollisions": true,
+          "enableConstraints": true,
+          "isoLevel": 0.5,
+          "gridResolution": 64,
+          "enableAudioReactivity": true
+        },
+
+        "fluidSimulation": {
+          "viscosity": 0.001,
+          "density": 1000.0,
+          "surfaceTension": 0.0728,
+          "gridResolution": 128,
+          "enableAdvection": true,
+          "enableDiffusion": true,
+          "enablePressure": true,
+          "solverIterations": 20,
+          "timeStep": 0.016
+        },
+
+        "particles": {
+          "maxParticles": 2000,
+          "enablePhysics": true,
+          "enableCollisions": true,
+          "enableForces": true,
+          "enableLifetime": true,
+          "defaultLifetime": 5.0,
+          "gravityStrength": 9.81,
+          "dampingFactor": 0.99
+        }
+      },
+
+      "materials": {
+        "enableMaterialSystem": true,
+        "enableTransitions": true,
+        "enablePhaseChanges": true,
+        "enableAudioReactivity": true,
+        "defaultMaterial": "water_pure",
+        
+        "transitions": {
+          "duration": 2.0,
+          "easing": "smoothstep",
+          "maxConcurrent": 4,
+          "enableBlending": true,
+          "preserveTemperature": false
+        },
+
+        "physics": {
+          "enableMaterialPhysics": true,
+          "enableThermalEffects": true,
+          "enableElectricalEffects": true,
+          "enableMagneticEffects": false,
+          "updateFrequency": 60
+        }
+      },
+
+      "rendering": {
+        "enablePhysicallyBasedShading": true,
+        "enableVolumetricEffects": true,
+        "enableCaustics": true,
+        "enableSubsurfaceScattering": true,
+        "enableReflections": true,
+        "enableRefractions": true,
+        "enableShadows": true,
+        "enablePostProcessing": true,
+
+        "lighting": {
+          "enablePBR": true,
+          "enableIBL": true,
+          "enableShadowMapping": true,
+          "shadowMapSize": 2048,
+          "maxLights": 8,
+          "enableVolumetricLighting": true,
+          "enableGodRays": false
+        },
+
+        "postProcessing": {
+          "enableBloom": true,
+          "enableSSR": false,
+          "enableSSAO": false,
+          "enableMotionBlur": false,
+          "enableDepthOfField": false,
+          "enableToneMapping": true,
+          "toneMappingMode": "aces",
+          "enableGammaCorrection": true
+        },
+
+        "shaders": {
+          "vertexShader": "blob.vert",
+          "fragmentShader": "blob.frag",
+          "enableShaderHotReload": true,
+          "enableShaderCaching": true,
+          "optimizationLevel": "high",
+          "enablePrecisionOptimization": true
+        }
+      },
+
+      "audioReactivity": {
+        "enabled": true,
+        "globalSensitivity": 1.0,
+        "smoothingFactor": 0.8,
+        "responsiveness": 0.7,
+        "enableBeatSync": true,
+        "beatSensitivity": 0.5,
+
+        "frequencyResponse": {
+          "bassEmphasis": 1.0,
+          "midEmphasis": 0.7,
+          "trebleEmphasis": 0.5,
+          "bassRange": [20, 250],
+          "midRange": [250, 4000],
+          "trebleRange": [4000, 20000]
+        },
+
+        "physicsResponse": {
+          "sizeModulation": 1.0,
+          "shapeModulation": 0.8,
+          "viscosityResponse": 0.6,
+          "surfaceTensionResponse": 0.4,
+          "temperatureResponse": 0.5,
+          "metaballResponse": 1.2
+        },
+
+        "visualResponse": {
+          "colorResponse": 1.0,
+          "emissionResponse": 1.5,
+          "reflectivityResponse": 0.3,
+          "roughnessResponse": 0.4,
+          "transparencyResponse": 0.2
+        },
+
+        "particleResponse": {
+          "emissionRate": 1.5,
+          "velocityModulation": 1.0,
+          "sizeModulation": 0.8,
+          "colorModulation": 1.2,
+          "lifetimeModulation": 0.6
+        }
+      },
+
+      "performance": {
+        "targetFPS": 60,
+        "adaptiveQuality": true,
+        "enablePerformanceMonitoring": true,
+        "qualityScaling": {
+          "enabled": true,
+          "minQuality": 0.25,
+          "maxQuality": 1.0,
+          "adjustmentRate": 0.1,
+          "stabilizationTime": 2000
+        },
+
+        "levelOfDetail": {
+          "enabled": true,
+          "distances": [10, 25, 50, 100],
+          "qualities": [1.0, 0.75, 0.5, 0.25],
+          "enableAutoAdjustment": true
+        },
+
+        "culling": {
+          "enableFrustumCulling": true,
+          "enableOcclusionCulling": false,
+          "enableBackfaceCulling": true,
+          "enableSmallTriangleCulling": true,
+          "minTriangleSize": 1.0
+        }
+      },
+
+      "quality": {
+        "presets": {
+          "minimal": {
+            "meshResolution": 16,
+            "physicsQuality": 0.2,
+            "enableVolumetrics": false,
+            "enableCaustics": false,
+            "enableParticles": false,
+            "maxMetaballs": 4,
+            "fluidResolution": 32
+          },
+          "low": {
+            "meshResolution": 32,
+            "physicsQuality": 0.4,
+            "enableVolumetrics": false,
+            "enableCaustics": false,
+            "enableParticles": true,
+            "maxMetaballs": 6,
+            "fluidResolution": 64
+          },
+          "medium": {
+            "meshResolution": 64,
+            "physicsQuality": 0.6,
+            "enableVolumetrics": true,
+            "enableCaustics": false,
+            "enableParticles": true,
+            "maxMetaballs": 8,
+            "fluidResolution": 128
+          },
+          "high": {
+            "meshResolution": 96,
+            "physicsQuality": 0.8,
+            "enableVolumetrics": true,
+            "enableCaustics": true,
+            "enableParticles": true,
+            "maxMetaballs": 12,
+            "fluidResolution": 256
+          },
+          "ultra": {
+            "meshResolution": 128,
+            "physicsQuality": 1.0,
+            "enableVolumetrics": true,
+            "enableCaustics": true,
+            "enableParticles": true,
+            "maxMetaballs": 16,
+            "fluidResolution": 512
+          }
+        }
+      },
+
+      "debug": {
+        "enableDebugMode": false,
+        "showWireframe": false,
+        "showNormals": false,
+        "showMetaballs": false,
+        "showPhysicsGrid": false,
+        "showPerformanceMetrics": false,
+        "enableShaderDebugging": false,
+        "showAudioData": false
+      }
+    }
+  },
+
+  "global": {
+    "rendering": {
+      "renderer": "webgl2",
+      "fallbackToWebGL1": true,
+      "enableExtensions": true,
+      "preferredExtensions": [
+        "EXT_color_buffer_float",
+        "OES_texture_float",
+        "WEBGL_depth_texture",
+        "EXT_shader_texture_lod",
+        "WEBGL_draw_buffers"
+      ],
+
+      "viewport": {
+        "enableResponsive": true,
+        "maintainAspectRatio": true,
+        "pixelRatio": "auto",
+        "maxPixelRatio": 2.0,
+        "enableHighDPI": true
+      },
+
+      "buffers": {
+        "colorFormat": "rgba8",
+        "depthFormat": "depth24_stencil8",
+        "enableDepthBuffer": true,
+        "enableStencilBuffer": false,
+        "enableMSAA": false,
+        "msaaSamples": 4
+      }
+    },
+
+    "performance": {
+      "enableGPUProfiling": false,
+      "enableCPUProfiling": false,
+      "enableMemoryProfiling": false,
+      "profilingInterval": 1000,
+      "enableFrameTimeGraph": false,
+      "maxFrameTimeHistory": 120,
+
+      "optimization": {
+        "enableBatching": true,
+        "enableInstancing": false,
+        "enableGeometryCompression": true,
+        "enableTextureCompression": true,
+        "enableShaderOptimization": true,
+        "enableGarbageCollection": true,
+        "gcInterval": 10000
+      },
+
+      "memory": {
+        "maxGeometryMemory": 134217728,
+        "maxTextureMemory": 268435456,
+        "maxShaderMemory": 67108864,
+        "enableMemoryWarnings": true,
+        "warningThreshold": 0.8,
+        "emergencyThreshold": 0.95
+      }
+    },
+
+    "input": {
+      "enableMouseControls": true,
+      "enableTouchControls": true,
+      "enableKeyboardControls": true,
+      "enableGamepadControls": false,
+
+      "camera": {
+        "enableOrbitControls": true,
+        "enableAutoRotate": false,
+        "autoRotateSpeed": 0.5,
+        "enableZoom": true,
+        "enablePan": true,
+        "zoomSpeed": 1.0,
+        "panSpeed": 1.0,
+        "dampingFactor": 0.1,
+        "minDistance": 5.0,
+        "maxDistance": 100.0
+      },
+
+      "interaction": {
+        "enableClickToInteract": true,
+        "enableHoverEffects": true,
+        "enableMultiTouch": true,
+        "enableGestures": true,
+        "gestureScale": 1.0,
+        "gestureRotation": 1.0
+      }
+    },
+
+    "audio": {
+      "integration": {
+        "enableRealTimeModification": true,
+        "responsiveness": 0.7,
+        "smoothingFactor": 0.8,
+        "latencyCompensation": 10,
+        "enablePrediction": false,
+        "predictionWindow": 50
+      },
+
+      "processing": {
+        "enableAdvancedFeatures": true,
+        "enableSpectralAnalysis": true,
+        "enableBeatDetection": true,
+        "enableOnsetDetection": true,
+        "enablePitchDetection": false,
+        "enableHarmonicAnalysis": false
+      },
+
+      "visualization": {
+        "enableSpectrumDisplay": false,
+        "enableWaveformDisplay": false,
+        "enableFeatureDisplay": false,
+        "spectrumRange": [20, 20000],
+        "spectrumBins": 64,
+        "logScale": true
+      }
+    }
+  },
+
+  "presets": {
+    "performance": {
+      "minimal": {
+        "name": "Minimal Performance",
+        "description": "Absolute minimum settings for very low-end devices",
+        "visualizer": "blob",
+        "quality": "minimal",
+        "targetFPS": 20,
+        "audioReactivity": 0.5,
+        "enablePhysics": false,
+        "enableParticles": false,
+        "enableVolumetrics": false
+      },
+
+      "low": {
+        "name": "Low Performance",
+        "description": "Optimized for low-end devices",
+        "visualizer": "blob",
+        "quality": "low",
+        "targetFPS": 30,
+        "audioReactivity": 0.7,
+        "enablePhysics": true,
+        "enableParticles": false,
+        "enableVolumetrics": false
+      },
+
+      "balanced": {
+        "name": "Balanced",
+        "description": "Good balance of quality and performance",
+        "visualizer": "blob",
+        "quality": "medium",
+        "targetFPS": 45,
+        "audioReactivity": 1.0,
+        "enablePhysics": true,
+        "enableParticles": true,
+        "enableVolumetrics": true
+      },
+
+      "quality": {
+        "name": "High Quality",
+        "description": "Optimized for visual quality",
+        "visualizer": "blob",
+        "quality": "high",
+        "targetFPS": 60,
+        "audioReactivity": 1.0,
+        "enablePhysics": true,
+        "enableParticles": true,
+        "enableVolumetrics": true
+      },
+
+      "showcase": {
+        "name": "Showcase",
+        "description": "Maximum quality for demonstrations",
+        "visualizer": "blob",
+        "quality": "ultra",
+        "targetFPS": 60,
+        "audioReactivity": 1.0,
+        "enablePhysics": true,
+        "enableParticles": true,
+        "enableVolumetrics": true,
+        "enableAllFeatures": true
+      }
+    },
+
+    "audioGenres": {
+      "electronic": {
+        "name": "Electronic Music",
+        "description": "Optimized for electronic and synthetic music",
+        "bassEmphasis": 1.5,
+        "trebleEmphasis": 1.2,
+        "beatSensitivity": 1.8,
+        "materialPreference": "electronic_pulse",
+        "colorResponse": 2.0,
+        "particleEmission": 1.5
+      },
+
+      "rock": {
+        "name": "Rock Music",
+        "description": "Heavy emphasis on bass and energy",
+        "bassEmphasis": 2.0,
+        "trebleEmphasis": 0.8,
+        "beatSensitivity": 1.5,
+        "materialPreference": "lava_molten",
+        "physicsResponse": 1.5,
+        "aggressiveTransitions": true
+      },
+
+      "classical": {
+        "name": "Classical Music",
+        "description": "Smooth, elegant response",
+        "bassEmphasis": 0.8,
+        "trebleEmphasis": 1.5,
+        "beatSensitivity": 0.8,
+        "materialPreference": "water_pure",
+        "smoothTransitions": true,
+        "elegantMotion": true
+      },
+
+      "ambient": {
+        "name": "Ambient Music",
+        "description": "Subtle, flowing response",
+        "bassEmphasis": 0.6,
+        "trebleEmphasis": 1.0,
+        "beatSensitivity": 0.5,
+        "materialPreference": "water_pure",
+        "gentleMotion": true,
+        "subtleColors": true
+      },
+
+      "jazz": {
+        "name": "Jazz Music",
+        "description": "Dynamic, improvisational response",
+        "bassEmphasis": 1.2,
+        "trebleEmphasis": 1.3,
+        "beatSensitivity": 1.1,
+        "materialPreference": "mercury_liquid",
+        "dynamicResponse": true,
+        "complexHarmonics": true
+      }
+    },
+
+    "visual": {
+      "calm": {
+        "name": "Calm Waters",
+        "description": "Peaceful, gentle visualization",
+        "material": "water_pure",
+        "audioReactivity": 0.5,
+        "smoothMotion": true,
+        "pastelColors": true,
+        "minimalParticles": true
+      },
+
+      "energetic": {
+        "name": "High Energy",
+        "description": "Dynamic, high-energy visualization",
+        "material": "plasma_ionized",
+        "audioReactivity": 1.5,
+        "aggressiveMotion": true,
+        "vibrantColors": true,
+        "maxParticles": true
+      },
+
+      "artistic": {
+        "name": "Artistic",
+        "description": "Creative, artistic visualization",
+        "material": "glass_molten",
+        "audioReactivity": 1.0,
+        "creativeTransitions": true,
+        "artisticColors": true,
+        "uniqueEffects": true
+      },
+
+      "minimal": {
+        "name": "Minimal",
+        "description": "Clean, minimal aesthetic",
+        "material": "water_pure",
+        "audioReactivity": 0.8,
+        "cleanLines": true,
+        "monochromeColors": true,
+        "minimalEffects": true
+      }
+    }
+  },
+
+  "validation": {
+    "requiredFields": {
+      "visualizer": ["id", "name", "type", "core", "geometry", "physics", "materials", "rendering", "audioReactivity"],
+      "core": ["enabled", "enableDepthTest", "enableBlending"],
+      "geometry": ["meshResolution", "enableAdaptiveMesh"],
+      "physics": ["enablePhysics"],
+      "materials": ["enableMaterialSystem", "defaultMaterial"],
+      "rendering": ["enablePhysicallyBasedShading"],
+      "audioReactivity": ["enabled", "globalSensitivity"]
+    },
+
+    "valueRanges": {
+      "meshResolution": [8, 256],
+      "targetFPS": [15, 120],
+      "audioReactivity": [0.0, 3.0],
+      "qualityLevel": [0.1, 1.0],
+      "metaballCount": [1, 32],
+      "particleCount": [0, 10000]
+    },
+
+    "warnings": {
+      "highPerformanceImpact": {
+        "meshResolution": 128,
+        "metaballCount": 16,
+        "particleCount": 5000,
+        "fluidResolution": 512
+      }
+    }
+  },
+
+  "compatibility": {
+    "webglVersions": {
+      "webgl1": {
+        "supported": true,
+        "limitations": ["no_transform_feedback", "limited_texture_formats", "no_integer_textures"],
+        "fallbacks": ["simpler_shaders", "reduced_precision", "alternative_algorithms"]
+      },
+      "webgl2": {
+        "supported": true,
+        "features": ["transform_feedback", "multiple_render_targets", "integer_textures", "uniform_buffer_objects"],
+        "preferred": true
+      }
+    },
+
+    "deviceSupport": {
+      "desktop": {
+        "recommended": ["high", "ultra"],
+        "fallback": "medium",
+        "enableAllFeatures": true
+      },
+      "mobile": {
+        "recommended": ["low", "medium"],
+        "fallback": "minimal",
+        "limitFeatures": true,
+        "enableThermalManagement": true
+      },
+      "tablet": {
+        "recommended": ["medium", "high"],
+        "fallback": "low",
+        "balancedFeatures": true
+      }
+    }
+  },
+
+  "integration": {
+    "renderEngine": {
+      "loadOnStartup": true,
+      "enableCaching": true,
+      "enableHotReload": true,
+      "enableValidation": true
+    },
+
+    "audioEngine": {
+      "enableRealTimeIntegration": true,
+      "enableBuffering": true,
+      "bufferSize": 1024,
+      "enableSmoothing": true
+    },
+
+    "materialSystem": {
+      "enableMaterialIntegration": true,
+      "enableAutoLoading": true,
+      "enableTransitionSync": true
+    },
+
+    "physicsEngine": {
+      "enablePhysicsIntegration": true,
+      "enableRealTimeUpdates": true,
+      "updateFrequency": 60,
+      "enableOptimizations": true
+    }
+  }
+}
